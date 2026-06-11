@@ -206,3 +206,5 @@ DATABASE_URL=your-database-url
 ## License
 
 - MIT License - Build something awesome with this code!
+MIT License - Build something awesome with this code!
+
