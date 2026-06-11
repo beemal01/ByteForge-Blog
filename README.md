@@ -1,6 +1,8 @@
-# ByteForge Blog
+﻿# ByteForge Blog
 
 A professional backend engineering blog platform built with Django REST Framework, featuring JWT authentication, rich text editing, and a modern tech-focused UI.
+
+**Try it live**: [https://byteforge.pythonanywhere.com/](https://byteforge.pythonanywhere.com/)
 
 ## What This Project Does
 
@@ -205,6 +207,8 @@ DATABASE_URL=your-database-url
 
 ## License
 
-- MIT License - Build something awesome with this code!
 MIT License - Build something awesome with this code!
 
+## Live Deployment
+
+The application is currently deployed on PythonAnywhere. You can test the live version at the link above to see how it works in production. The deployment uses the same codebase with production-ready settings for email configuration and database management.
