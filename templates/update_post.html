@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="form-wrapper">
+        <h3>Update Post</h3>
+        <p class="text-muted mb-4">Edit your technical article</p>
+        
+        {% if messages %}
+        <div class="alert alert-{{ messages.tags }}">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="message" class="alert alert-danger d-none"></div>
+            
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" class="form-control" value="{{ post.title }}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="featured_image" class="form-label">Featured Image</label>
+                {% if post.featured_image %}
+                <div class="mb-2">
+                    <img src="{{ post.featured_image.url }}" alt="Current image" class="rounded" style="max-width: 200px;">
+                </div>
+                {% endif %}
+                <input type="file" id="featured_image" class="form-control">
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label">Blog Content</label>
+                <div id="editor" style="height: 300px;">{{ post.blog_body|safe }}</div>
+            </div>
+            
+            <button type="button" id="btn" onclick="updatePost('{{ post.slug }}')" class="btn btn-success">Update Post</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% if post.blog_body %}
+<script>
+  if (typeof quill !== 'undefined') {
+    quill.root.innerHTML = `{{ post.blog_body|safe }}`;
+  }
+</script>
+{% endif %}

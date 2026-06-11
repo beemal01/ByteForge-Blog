@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="form-wrapper">
+        <h3>Join ByteForge</h3>
+        <p class="text-muted mb-4">Create your developer account</p>
+        
+        {% if messages %}
+        <div class="alert alert-{{ messages.tags }}">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div id="message" class="alert alert-danger d-none"></div>
+            
+            <div class="mb-3">
+                <label for="regName" class="form-label">Full Name</label>
+                <input type="text" id="regName" class="form-control" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="regEmail" class="form-label">Email Address</label>
+                <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="mb-4">
+                <label for="regPassword" class="form-label">Password</label>
+                <input type="password" id="regPassword" class="form-control" placeholder="Create a password" required>
+            </div>
+            
+            <button type="button" id="btn" class="btn btn-primary w-100" onclick="signupFunc()">Create Account</button>
+            
+            <div class="text-center mt-4">
+                <p class="mb-0">Already have an account? <a href="/signin/" class="text-primary">Sign In</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

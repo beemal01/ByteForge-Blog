@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="form-wrapper">
+        <h3>Create New Post</h3>
+        <p class="text-muted mb-4">Share your backend insights and technical knowledge</p>
+        
+        {% if messages %}
+        <div class="alert alert-{{ messages.tags }}">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="message" class="alert alert-danger d-none"></div>
+            
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" class="form-control" placeholder="Enter your post title" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="featured_image" class="form-label">Featured Image</label>
+                <input type="file" name="featured_image" id="featured_image" class="form-control" required>
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label">Blog Content</label>
+                <div id="editor" style="height: 300px;"></div>
+            </div>
+            
+            <button type="button" id="btn" onclick="submitPost()" class="btn btn-primary">Publish Post</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="form-wrapper">
+        <h3>Welcome Back, Hacker</h3>
+        <p class="text-muted mb-4">Sign in to access your developer dashboard</p>
+        
+        {% if messages %}
+        <div class="alert alert-{{ messages.tags }}">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div id="message" class="alert alert-danger d-none"></div>
+            
+            <div class="mb-3">
+                <label for="logEmail" class="form-label">Email Address</label>
+                <input type="email" id="logEmail" class="form-control" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="mb-4">
+                <label for="logPassword" class="form-label">Password</label>
+                <input type="password" id="logPassword" class="form-control" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="button" id="btn" class="btn btn-primary w-100" onclick="logUser()">Sign In</button>
+            
+            <div class="text-center mt-4">
+                <p class="mb-0">Don't have an account? <a href="/signup/" class="text-primary">Register</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

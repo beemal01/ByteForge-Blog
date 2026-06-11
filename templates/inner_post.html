@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <article class="card mb-4 border-0 shadow-sm">
+        <div class="card-body p-4">
+            <div class="post-header">
+                <h2 class="post-title">{{ post.title }}</h2>
+                <div class="post-meta">
+                    <span class="author">
+                        <span class="avatar avatar-sm">{{ post.author.name|first }}</span>
+                        <span>{{ post.author.name }}</span>
+                    </span>
+                    <span class="date">{{ post.created_at | date:"M d, Y" }}</span>
+                </div>
+                
+                <div id="author-actions" data-author-name="{{ post.author.name }}" class="mb-4 d-flex gap-2" style="display:none !important;">
+                    <a id="update-btn" class="btn btn-warning btn-sm" href="/update_post/{{ post.slug }}/">Update</a>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deletePost('{{ post.slug }}')">Delete</button>
+                </div>
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var access = localStorage.getItem('access');
+                    var authorActions = document.getElementById('author-actions');
+                    if (access && authorActions) {
+                        var authorName = authorActions.getAttribute('data-author-name');
+                        var storedName = localStorage.getItem('name');
+                        if (storedName && authorName && 
+                            storedName.trim().toLowerCase() === authorName.trim().toLowerCase()) {
+                            authorActions.style.setProperty('display', 'flex', 'important');
+                        }
+                    }
+                });
+                </script>
+                
+            </div>
+
+            {% if post.featured_image %}
+            <img src="{{ post.featured_image.url }}" class="img-fluid mb-4 rounded" alt="Blog Image" style="width:100%; height:auto; max-height:400px; object-fit:cover;" onerror="this.style.display='none'">
+            {% endif %}
+
+            <div class="post-content">{{ post.blog_body|safe }}</div>
+        </div>
+    </article>
+</div>
+
+{% endblock content %}

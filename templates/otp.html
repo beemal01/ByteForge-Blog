@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="form-wrapper">
+        <h3>Enter OTP</h3>
+        <p class="text-muted mb-4">Please check your email and enter the verification code</p>
+        
+        {% if messages %}
+        <div class="alert alert-{{ messages.tags }}">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div id="message" class="alert alert-danger d-none"></div>
+            
+            <div class="mb-4">
+                <label for="otp" class="form-label">Verification Code</label>
+                <input type="text" id="otp" class="form-control" placeholder="Enter OTP" required>
+            </div>
+            
+            <button type="button" id="btn" class="btn btn-primary w-100" onclick="optUser()">Verify</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
